@@ -90,7 +90,9 @@ return [
         'users' => [
             'provider' => 'users',
             'table' => 'password_resets',
-            'expire' => 60,
+            #tiempo valido del link enviado al correo para verificacion de la cuenta en minutos
+            'expire' => 120,
+            #cantidad de intentos de reseteo de contraseña por tiempo (uno cada 60segundos) en segundos
             'throttle' => 60,
         ],
     ],

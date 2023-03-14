@@ -29,6 +29,7 @@ Route::middleware('guest')->group(function () {
                 ->name('password.email');
 
     Route::get('reset-password/{token}', [NewPasswordController::class, 'create'])
+                ->middleware(['signed'])
                 ->name('password.reset');
 
     Route::post('reset-password', [NewPasswordController::class, 'store'])

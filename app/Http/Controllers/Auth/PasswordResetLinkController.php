@@ -8,6 +8,10 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Password;
 use Illuminate\View\View;
 use App\Models\User;
+
+use function PHPUnit\Framework\isNan;
+use function PHPUnit\Framework\isNull;
+
 class PasswordResetLinkController extends Controller
 {
     /**
@@ -29,8 +33,12 @@ class PasswordResetLinkController extends Controller
             'cedula' => ['required', 'string', 'max:13'],
             'email' => ['required', 'email'],
         ]);
-        $user = User::where('cedula', $request->cedula)->first();
-        if ($user->email === $request->email) {   
+        $user = User::where('cedula', '=', $request->cedula)->first();
+        if(empty($user)){
+            return back()->withInput($request->only('email'))
+                    ->withErrors(['email' => "No existen registros coincidentes."]);         
+        }
+        if ($user->email == $request->email) {   
             // We will send the password reset link to this user. Once we have attempted
             // to send the link, we will examine the response then see the message we
             // need to show to the user. Finally, we'll send out a proper response.

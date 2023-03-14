@@ -37,6 +37,7 @@ class ProfileController extends Controller
             'name' => $request->name,
             'last_name' => $request->last_name,
             'phone_number' => $request->phone_number,
+            'email' => $request->email,
         ]);
         
         if ($request->user()->isDirty('email')) {
