@@ -34,11 +34,10 @@ class CustomVerifyEmail extends Notification
         return ['mail'];
     }
 
-
     public function toMail($notifiable)
     {
         return (new MailMessage)
-            ->subject(Lang::get('Verify Email Address'))
+            ->subject(Lang::get('No reply: ').' '.Lang::get('Verify Email Address'))
             ->greeting(Lang::get("Hello ") . $notifiable->name)
             ->line(Lang::get('Please click the button below to verify your email address.'))
             ->action(Lang::get('Verify Email Address'), $this->verificationUrl($notifiable),)

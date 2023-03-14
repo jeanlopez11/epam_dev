@@ -80,7 +80,8 @@ class CustomResetPassword extends Notification
              Config::get('auth.verification.expire', config('auth.passwords.users.expire'))),
             //  ['count' => config('auth.passwords.'.config('auth.defaults.passwords').'.expire')]
                [
-                 'token' => $notifiable->getKey(),
+                    'token' => $this->token,
+                    'email' => $notifiable->getEmailForPasswordReset(),	
                ]     
           ); 
     }
